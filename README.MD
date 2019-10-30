@@ -4,10 +4,10 @@
 
 ## Content
 
-1. [Setting a development environment](https://github.com/DonAurelio/manuals/blob/master/open-datacube/1.geting_started.md)
-2. [Landsat 8 Scene Adquisition](https://github.com/DonAurelio/manuals/blob/master/open-datacube/2.scene_adquisition.md)
-3. [Landsat 8 scene Indexation/Ingestion](https://github.com/DonAurelio/manuals/blob/master/open-datacube/3.product_creation.md)
-4. [First Application](https://github.com/DonAurelio/manuals/blob/master/open-datacube/4.inspect_datacube_data.md)
+1. [Setting a development environment](1.geting_started.md)
+2. [Landsat 8 Scene Adquisition](2.scene_adquisition.md)
+3. [Landsat 8 scene Indexation/Ingestion](3.product_creation.md)
+4. [First Application](4.inspect_datacube_data.md)
 
 # Credits
 
