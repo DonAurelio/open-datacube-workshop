@@ -4,10 +4,10 @@
 
 ## Content
 
-1. [Setting up a Datacube Environment with Docker](https://github.com/DonAurelio/manuals/blob/master/open-datacube/1.geting_started.md)
-2. [Scene Adquisition](https://github.com/DonAurelio/manuals/blob/master/open-datacube/2.scene_adquisition.md)
-3. [Create a Product to index a Landsat 8 scene](https://github.com/DonAurelio/manuals/blob/master/open-datacube/3.product_creation.md)
-4. [Inspect the datacube available data and perform your first query](https://github.com/DonAurelio/manuals/blob/master/open-datacube/4.inspect_datacube_data.md)
+1. [Setting a development environment](https://github.com/DonAurelio/manuals/blob/master/open-datacube/1.geting_started.md)
+2. [Landsat 8 Scene Adquisition](https://github.com/DonAurelio/manuals/blob/master/open-datacube/2.scene_adquisition.md)
+3. [Landsat 8 scene Indexation/Ingestion](https://github.com/DonAurelio/manuals/blob/master/open-datacube/3.product_creation.md)
+4. [First Application](https://github.com/DonAurelio/manuals/blob/master/open-datacube/4.inspect_datacube_data.md)
 
 # Credits
 
@@ -22,6 +22,3 @@ This documentation was elaborated based on the experiences adquired at the Colom
 5. [Coordinate Reference Systems](https://docs.qgis.org/testing/en/docs/gentle_gis_introduction/coordinate_reference_systems.html)
 6. [Open Datacube Jupyter Notebooks](https://datacube-core.readthedocs.io/en/stable/user/guide.html)
 7. [Lesson 1. Clean Remote Sensing Data in Python - Clouds, Shadows & Cloud Masks](https://www.earthdatascience.org/courses/earth-analytics-python/multispectral-remote-sensing-modis/cloud-masks-with-spectral-data-python/)
-
-
-sudo apt install libspatialindex-dev
