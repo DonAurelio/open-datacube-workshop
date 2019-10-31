@@ -3,7 +3,6 @@
 """
 This algorithms was developed by Salomón Rarmiréz at Institute of Hydrology, 
 Meteorology and Environmental Studies (IDEAM), Bogotá, Colombia)
-
 Reference
 https://raw.githubusercontent.com/OpenDatacubeIDEAM/cdcol/desacoplado/algorithms/medianas/medianas_2.1.py
 """
@@ -19,7 +18,7 @@ def isin(element, test_elements, assume_unique=False, invert=False):
     return np.in1d(element, test_elements, assume_unique=assume_unique,invert=invert).reshape(element.shape)
 
 
-def median_compound(xarr,product,normalized):
+def median_compound(xarr,product,bands,min_valid=1,normalized=False):
     nbar = xarr
     #Un valor negativo suficientemente grande para representar cuando no hay datos
     nodata=-9999
@@ -53,7 +52,7 @@ def median_compound(xarr,product,normalized):
             datos=np.true_divide((datos-m[:,np.newaxis,np.newaxis]), st[:,np.newaxis,np.newaxis])*np.nanmean(st)+np.nanmean(m)
         #Calcula la mediana aritmetica 
         medians[band]=np.nanmedian(datos,0)
-        medians[band][np.sum(allNan,0)<minValid]=np.nan
+        medians[band][np.sum(allNan,0)<min_valid]=np.nan
     #Elimina la variable datos y la asociacion que tiene en el algoritmo
     del datos
 
