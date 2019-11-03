@@ -2,14 +2,17 @@
 
 "The Open Data Cube Core provides an integrated gridded data analysis environment for decades of analysis ready earth observation satellite and related data from multiple satellite and other acquisition systems."
 
-## Content
+### Content
 
-1. [Setting a development environment](1.geting_started.md)
-2. [Landsat 8 Scene Adquisition](2.scene_adquisition.md)
-3. [Landsat 8 scene Indexation/Ingestion](3.product_creation.md)
-4. [First Application](4.inspect_datacube_data.md)
+1. Setting a development environment
+2. Landsat 8 Scene Adquisition
+3. Landsat 8 scene Indexation/Ingestion
+4. First Application
 
-# Credits
+We invite you to follow the workshop on the [wiki](https://github.com/DonAurelio/open-datacube-workshop/wiki)
+
+
+### Credits
 
 This documentation was elaborated based on the experiences adquired at the Colombian Open Datacube Proyect developed by Universidad de los Andes, Bogotá, Colombia.
 
