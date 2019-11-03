@@ -1,16 +1,15 @@
-# An Open Datacube Getting Started Guide
+# Satellite Image Processing with the Open Datacube - Workshop 
 
-"The Open Data Cube Core provides an integrated gridded data analysis environment for decades of analysis ready earth observation satellite and related data from multiple satellite and other acquisition systems."
+The Open Data Cube provides an integrated gridded data analysis environment in Python for analysis ready earth observation satellite data. This workshop comprise the follwing conent:
 
 ### Content
 
 1. Setting a development environment
 2. Landsat 8 Scene Adquisition
 3. Landsat 8 scene Indexation/Ingestion
-4. First Application
+4. First Satellite Image Processing Application
 
 We invite you to follow the workshop on the [wiki](https://github.com/DonAurelio/open-datacube-workshop/wiki)
-
 
 ### Credits
 
