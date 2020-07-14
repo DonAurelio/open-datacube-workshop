@@ -1,4 +1,4 @@
-# Workshop: Satellite Image Processing with the Open Datacube 1.6
+## Workshop: Satellite Image Processing with the Open Datacube 1.6
 
 The Open Data Cube provides an easy to use Python enviroment to work with analysis ready earth observation data.
 This workshop comprises the following content:
@@ -11,16 +11,14 @@ This workshop comprises the following content:
 2. Landsat 8 scene Indexation/Ingestion
 3. First Application
 
-0 is available on this readme. 1 - 4 are available on the jupyter notebooks or through this [wiki](https://github.com/DonAurelio/open-datacube-workshop/wiki).
+0 is available on this readme. 1 - 4 are available on the jupyter notebooks or through the [wiki](https://github.com/DonAurelio/open-datacube-workshop/wiki).
 
-### Setting the development enviorment.
-
-1. **Requirements:**
+### Requirements
 
 * Docker 
 * Docker Compose
 
-2. **Configuration Steps:**
+### Setting the development enviorment.
 
 Clone this repository and get into the **open-datacube-workshop** foder.
 
@@ -90,8 +88,7 @@ cube@579ffee39db6:~$ jupyter notebook --no-browser --port=8888 --ip=0.0.0.0 --al
 
 #### Get into the Tutorial
 
-Follow the notebooks at **/notebooks/tutorial** folder. The tutorial is also available on the [wiki](https://github.com/DonAurelio/open-datacube-workshop/wiki).
-
+Follow [http://localhost:8888/tree/notebooks/tutorial](http://localhost:8888/tree/notebooks/tutorial) to get into the notebooks comprising the tutorial. The tutorial is also available on the [wiki](https://github.com/DonAurelio/open-datacube-workshop/wiki).
 
 #### Manage Containers
 
@@ -120,7 +117,7 @@ docker-compose down -v --remove-orphans
 ```
 
 
-### Credits
+## Credits
 
 This documentation was elaborated based on the experiences acquired at the Colombian Open Data Cube Project developed by Universidad de los Andes, Bogotá, Colombia.
 
