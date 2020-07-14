@@ -15,6 +15,13 @@ This workshop comprises the following content:
 
 ### Setting the development enviorment.
 
+1. **Requirements:**
+
+* Docker 
+* Docker Compose
+
+2. **Configuration Steps:**
+
 Clone this repository and get into the **open-datacube-workshop** foder.
 
 ```sh 
