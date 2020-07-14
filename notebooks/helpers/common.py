@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 # coding=utf8
 
-from datacube.storage import netcdf_writer
-from datacube.model import Variable
+#from datacube.storage import netcdf_writer
+#from datacube.model import Variable
 import datacube
 import numpy as np
+from datacube.drivers.netcdf import writer as netcdf_writer
 from datacube.utils.geometry import CRS
 from datacube.utils import geometry, data_resolution_and_offset
 from rasterio.transform import from_bounds
@@ -19,18 +20,32 @@ import xarray as xr
 import itertools
 import rasterio
 import time
-# import logging
+import logging
 
+logging.basicConfig(
+    format='%(levelname)s : %(asctime)s : %(message)s',
+    level=logging.DEBUG
+)
 
+# To print loggin information in the console
+logging.getLogger().addHandler(logging.StreamHandler())
+
+ALGORITHMS_FOLDER = "/web_storage/algorithms/workflows"
+COMPLETE_ALGORITHMS_FOLDER="/web_storage/algorithms"
+RESULTS_FOLDER = "/web_storage/results"
+LOGS_FOLDER = "/web_storage/logs"
 nodata=-9999
 
 
-def save_netcdf(output,filename,history='no history'):
+#def saveNC(output,filename,history):
+#    output.to_netcdf(filename,format='NETCDF3_CLASSIC')
 
-    # logging.info('saveNC: dataset {} - {}'.format(
-    #     type(output),output
-    #     )
-    # )
+def saveNC(output,filename,history):
+
+    logging.info('saveNC: dataset {} - {}'.format(
+        type(output),output
+        )
+    )
 
     start = time.time()
     nco=netcdf_writer.create_netcdf(filename)
@@ -45,7 +60,7 @@ def save_netcdf(output,filename,history='no history'):
     # we reorder the coordinates system to match
     coord_names = list(output.coords.keys())
 
-    # print('coord_names_antes',coord_names)
+    print('coord_names_antes',coord_names)
 
     sample_coords = []
     if 'time' in coord_names:
@@ -67,7 +82,7 @@ def save_netcdf(output,filename,history='no history'):
     sample_coords = sample_coords + coord_names
     coord_names = sample_coords
 
-    # print('coord_names_despues',coord_names)
+    print('coord_names_despues',coord_names)
 
     #for x in coords:
     for x in coord_names:
@@ -85,14 +100,14 @@ def save_netcdf(output,filename,history='no history'):
         if band in coords.keys() or band == 'crs':
             continue
         output.data_vars[band].values[np.isnan(output.data_vars[band].values)]=nodata
-        var= netcdf_writer.create_variable(nco, band, Variable(output.data_vars[band].dtype, nodata, cnames, None) ,set_crs=True)
+        var= netcdf_writer.create_variable(nco, band, netcdf_writer.Variable(output.data_vars[band].dtype, nodata, cnames, None) ,set_crs=True)
         var[:] = netcdf_writer.netcdfy_data(output.data_vars[band].values)
     nco.close()
 
     end = time.time()
-    # logging.info('TIEMPO SALIDA NC:' + str((end - start)))
+    logging.info('TIEMPO SALIDA NC:' + str((end - start)))
 
-def read_netcdf(file):
+def readNetCDF(file):
 
     start = time.time()
     try:
@@ -101,18 +116,17 @@ def read_netcdf(file):
             _xarr.attrs['crs']= _xarr.data_vars['crs']
             _xarr = _xarr.drop('crs')
         end = time.time()
-        # logging.info('TIEMPO CARGA NC:' + str((end - start)))
+        logging.info('TIEMPO CARGA NC:' + str((end - start)))
 
 
-        # logging.info('readNetCDF: dataset {} - {}'.format(
-        #     type(_xarr),_xarr
-        #     )
-        # )
+        logging.info('readNetCDF: dataset {} - {}'.format(
+            type(_xarr),_xarr
+            )
+        )
 
         return _xarr
     except Exception as e:
-        print('ERROR CARGA NC:' + str(e))
-        # logging.info('ERROR CARGA NC:' + str(e))
+        logging.info('ERROR CARGA NC:' + str(e))
 
 
 def getUpstreamVariable(task, context,key='return_value'):
@@ -123,7 +137,7 @@ def getUpstreamVariable(task, context,key='return_value'):
     #upstream_task_ids = task.get_direct_relatives(upstream=True)
     upstream_variable_values = task_instance.xcom_pull(task_ids=upstream_task_ids, key=key)
     end = time.time()
-    # logging.info('TIEMPO UPSTREAM:' + str((end - start)))
+    logging.info('TIEMPO UPSTREAM:' + str((end - start)))
     return list(itertools.chain.from_iterable(filter(None.__ne__,upstream_variable_values)))
 
 def _get_transform_from_xr(dataset):
@@ -134,7 +148,7 @@ def _get_transform_from_xr(dataset):
     #                            len(dataset.longitude), len(dataset.latitude))
     geotransform = from_bounds(geobox['left'], geobox['top'], geobox['right'], geobox['bottom'],
                                len(dataset.longitude), len(dataset.latitude))
-    # print(geotransform)
+    print(geotransform)
     return geotransform
 
 def calculate_bounds_geotransform(dataset):
@@ -145,7 +159,7 @@ def calculate_bounds_geotransform(dataset):
         _crs = CRS(str(crs_dict['attrs']['spatial_ref']))
 
     # Leave the CRS as it is (datacube CRS object)
-    elif isinstance(dataset.crs,datacube.utils.geometry.CRS):
+    elif isinstance(dataset.crs,datacube.utils.geometry._base.CRS):
         _crs = dataset.crs
 
     else:
@@ -165,7 +179,7 @@ def calculate_bounds_geotransform(dataset):
 
 
 
-def save_geotiff(dataset,tif_path,bands=[], no_data=-9999, crs="EPSG:4326"):
+def write_geotiff_from_xr(tif_path, dataset, bands=[], no_data=-9999, crs="EPSG:4326"):
 
     """Write a geotiff from an xarray dataset.
 
@@ -189,10 +203,10 @@ def save_geotiff(dataset,tif_path,bands=[], no_data=-9999, crs="EPSG:4326"):
     assert isinstance(bands, list), "Bands must a list of strings"
     assert len(bands) > 0 and isinstance(bands[0], str), "You must supply at least one band."
 
-    # logging.info('write_geotiff_from_xr: dataset {} - {}'.format(
-    #     type(dataset),dataset
-    #     )
-    # )
+    logging.info('write_geotiff_from_xr: dataset {} - {}'.format(
+        type(dataset),dataset
+        )
+    )
 
     #print(dataset.crs)
     #if dataset.crs is not None:
@@ -215,7 +229,7 @@ def save_geotiff(dataset,tif_path,bands=[], no_data=-9999, crs="EPSG:4326"):
         crs_dict = dataset.crs.to_dict()
         crs = CRS_rasterio.from_wkt(crs_dict['attrs']['crs_wkt'])
 
-    elif isinstance(dataset.crs,datacube.utils.geometry.CRS):
+    elif isinstance(dataset.crs,datacube.utils.geometry._base.CRS):
         crs = CRS_rasterio.from_string(dataset.crs.crs_str)
     else:
         raise Exception('dataset.crs datatype not know (please check calculate_bounds_geotransform)')
@@ -236,7 +250,7 @@ def save_geotiff(dataset,tif_path,bands=[], no_data=-9999, crs="EPSG:4326"):
                        bounds=bounds,
                        nodata=no_data) as dst:
         for index, band in enumerate(bands):
-            # print(dataset[band].dtype)
+            print(dataset[band].dtype)
             dst.write_band(index + 1, dataset[band].values.astype(dataset[bands[0]].dtype), )
             tag = {'Band_'+str(index+1): bands[index]}
             dst.update_tags(**tag)

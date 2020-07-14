@@ -1,0 +1,32 @@
+version: "3"
+services:
+
+  cube_db:
+    image: postgres:9.5
+    restart: on-failure
+    environment:
+      - POSTGRES_DB=datacube
+      - POSTGRES_USER=datacube
+      - POSTGRES_PASSWORD=datacube
+
+  cube:
+    image: donaurelio/open-datacube:1.6.1-base
+    restart: on-failure
+    tty: true
+    # The container entrypoint will create the 
+    # datacube.conf file using the following 
+    # enviroment variables 
+    environment:
+      - DB_DATABASE=datacube 
+      - DB_HOSTNAME=cube_db 
+      - DB_USERNAME=datacube 
+      - DB_PASSWORD=datacube 
+    volumes:
+      - ./notebooks:/home/cube/notebooks
+      - ./products:/home/cube/products
+      - ./ingestion:/home/cube/ingestion
+    # To keep container alive
+    command: tail -F /home/cube/.datacube.conf
+    ports:
+      # Jupyter notebook port
+      - 8888:8888
