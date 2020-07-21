@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=datacube
 
   datacube:
-    image: datacube:1.8.2-final
+    image: donaurelio/datacube:1.8.2
     restart: on-failure
     tty: true
     volumes:

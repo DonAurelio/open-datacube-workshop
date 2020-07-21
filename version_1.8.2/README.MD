@@ -1,29 +1,9 @@
-## Workshop: Satellite Image Processing with the Open Datacube 1.8.2
+# Setting Open Datacube 1.8.2 for the Tutorial
 
-The Open Data Cube provides an easy to use Python enviroment to work with analysis ready earth observation data.
-This workshop comprises the following content:
-
-### Content
-
-0. Setting the development enviorment.
-1. Gentle introduction to remote sensing and satellite image processing
-2. Landsat 8 Scene Adquisition
-2. Landsat 8 scene Indexation/Ingestion
-3. First Application
-
-0 is available on this readme. 1 - 4 are available on the jupyter notebooks or through the [wiki](https://github.com/DonAurelio/open-datacube-workshop/wiki).
-
-### Requirements
-
-* Docker 
-* Docker Compose
-
-### Setting the development enviorment.
-
-Clone this repository and get into the **open-datacube-workshop** foder.
+Clone this repository and get into the **open-datacube-workshop/version_1.8.2** foder.
 
 ```sh 
-git clone https://github.com/DonAurelio/open-datacube-workshop.git && cd open-datacube-workshop
+git clone https://github.com/DonAurelio/open-datacube-workshop.git && cd open-datacube-workshop/version_1.8.2
 ```
 
 Start containers
@@ -38,31 +18,33 @@ Inspect runnig containes
 docker-compose ps
 ```
 
-Get into the **cube** container
+Get into the **datacube** container
 
 ```sh
-docker-compose exec cube bash
+docker-compose exec datacube bash
 ```
 
 #### Create datacube database
 
-With the following command, the opendatacube API will create all the tables needed to track the information regarding satelite images.
+With the following command, the opendatacube API will create all the tables needed to track the information regarding satelite images indexed in the cube.
 
 ```sh 
-cube@579ffee39db6:~$ datacube system init 
+datacube@487239d46d68:~$ datacube system init 
 Initialising database...
 Created.
+Checking indexes/views.
+Done.
 ```
 
 #### Check if datacube system is ready
 
-With the following command we will check if the open datacube API can reach the database and its working properly.
+Check if the open datacube API can reach the database and its working properly.
 
 ```sh 
-cube@579ffee39db6:~$ datacube system check 
-Version:       1.6.1+0.gee3c3d81.dirty
-Config files:  /home/cube/.datacube.conf
-Host:          cube_db:5432
+datacube@487239d46d68:~$ datacube system check 
+Version:       1.8.2
+Config files:  
+Host:          database:5432
 Database:      datacube
 User:          datacube
 Environment:   None
@@ -71,14 +53,7 @@ Index Driver:  default
 Valid connection:	YES
 ```
 
-#### Configure Jupyter
-
-Prevent jupyter notebook to ask for a password
-
-```sh
-cube@579ffee39db6:~$ mkdir /home/cube/.jupyter
-cube@579ffee39db6:~$ echo c.NotebookApp.token = \'\' > /home/cube/.jupyter/jupyter_notebook_config.py
-```
+#### Start Jupyter
 
 Start jupyter notebooks
 
@@ -88,7 +63,7 @@ cube@579ffee39db6:~$ jupyter notebook --no-browser --port=8888 --ip=0.0.0.0 --al
 
 #### Get into the Tutorial
 
-Follow [http://localhost:8888/tree/notebooks/tutorial](http://localhost:8888/tree/notebooks/tutorial) to get into the notebooks comprising the tutorial. The tutorial is also available on the [wiki](https://github.com/DonAurelio/open-datacube-workshop/wiki).
+Use the following link [http://localhost:8881/tree/notebooks](http://localhost:8888/tree/notebooks) and follow the jupyter notebooks. 
 
 #### Manage Containers
 
@@ -116,10 +91,6 @@ Destroy containers
 docker-compose down -v --remove-orphans
 ```
 
-
-## Credits
-
-This documentation was elaborated based on the experiences acquired at the Colombian Open Data Cube Project developed by Universidad de los Andes, Bogotá, Colombia.
 
 <!-- # References  -->
 
