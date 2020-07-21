@@ -1,0 +1,28 @@
+version: "3"
+services:
+
+  database:
+    image: postgres:10
+    restart: on-failure
+    environment:
+      - POSTGRES_DB=datacube
+      - POSTGRES_USER=datacube
+      - POSTGRES_PASSWORD=datacube
+
+  datacube:
+    image: datacube:1.8.2-final
+    restart: on-failure
+    tty: true
+    volumes:
+      - ./notebooks:/home/datacube/notebooks
+      - ./products:/home/datacube/products
+    environment:
+      - DB_DATABASE=datacube 
+      - DB_HOSTNAME=database 
+      - DB_USERNAME=datacube 
+      - DB_PASSWORD=datacube 
+    # To keep container alive
+    command: tail -F /home/datacube/.datacube.conf
+    ports:
+      # Jupyter notebook port
+      - 8881:8888
