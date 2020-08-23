@@ -58,19 +58,19 @@ Valid connection:	YES
 Start jupyter notebooks
 
 ```sh 
-cube@579ffee39db6:~$ jupyter notebook --no-browser --port=8888 --ip=0.0.0.0 --allow-root
+datacube@c4c14def6f38:~$ jupyter notebook --no-browser --port=8888 --ip=0.0.0.0 --allow-root
 ```
 
 #### Get into the Tutorial
 
-Use the following link [http://localhost:8881/tree/notebooks](http://localhost:8888/tree/notebooks) and follow the jupyter notebooks. 
+Use the following link [http://localhost:8881/tree/notebooks](http://localhost:8881/tree/notebooks) and follow the jupyter notebooks. 
 
 #### Manage Containers
 
 Exit within the container
 
 ```sh
-cube@579ffee39db6:~$ exit
+datacube@c4c14def6f38:~$ exit
 ```
 
 Stop containers

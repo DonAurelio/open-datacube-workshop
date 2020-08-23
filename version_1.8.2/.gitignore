@@ -1,0 +1,5 @@
+datasets_storage/*
+ingested_storage/*
+
+!datasets_storage/README.MD
+!ingested_storage/README.MD

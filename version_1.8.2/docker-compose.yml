@@ -10,12 +10,14 @@ services:
       - POSTGRES_PASSWORD=datacube
 
   datacube:
-    image: donaurelio/datacube:1.8.2
+    image: datacube:1.8.2
     restart: on-failure
     tty: true
     volumes:
       - ./notebooks:/home/datacube/notebooks
       - ./products:/home/datacube/products
+      - ./datasets_storage:/datasets_storage
+      - ./ingested_storage:/ingested_storage
     environment:
       - DB_DATABASE=datacube 
       - DB_HOSTNAME=database 
