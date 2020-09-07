@@ -41,25 +41,3 @@ For this workshop it is necessary to have the following requirements installed.
 
 * Docker 
 * Docker Compose
-
-<!-- # References  -->
-
-<!-- 1. [View Landsat 8 imagery for a chosen time period](http://geoscienceaustralia.github.io/digitalearthau/notebooks/09_Workflows/RetrieveLandsat8ViewAndExport.html)
-2. [netCDF4 module](https://unidata.github.io/netcdf4-python/netCDF4/index.html)
-3. [Lesson 1. Export Numpy Arrays to Geotiff Format Using Rasterio and Python](https://www.earthdatascience.org/courses/earth-analytics-python/multispectral-remote-sensing-in-python/export-numpy-array-to-geotiff-in-python/)
-4. [Calculate NDVI using rasterio](http://www.loicdutrieux.net/pyLandsat/NDVI_calc.html)
-5. [Coordinate Reference Systems](https://docs.qgis.org/testing/en/docs/gentle_gis_introduction/coordinate_reference_systems.html)
-6. [Open Datacube Jupyter Notebooks](https://datacube-core.readthedocs.io/en/stable/user/guide.html)
-7. [Lesson 1. Clean Remote Sensing Data in Python - Clouds, Shadows & Cloud Masks](https://www.earthdatascience.org/courses/earth-analytics-python/multispectral-remote-sensing-modis/cloud-masks-with-spectral-data-python/)
- -->
-
-Shield: [![CC BY 4.0][cc-by-shield]][cc-by]
-
-This work is licensed under a
-[Creative Commons Attribution 4.0 International License][cc-by].
-
-[![CC BY 4.0][cc-by-image]][cc-by]
-
-[cc-by]: http://creativecommons.org/licenses/by/4.0/
-[cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png
-[cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
